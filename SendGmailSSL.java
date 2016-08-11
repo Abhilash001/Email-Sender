@@ -2,7 +2,7 @@
 * Author: Abhilash Misra 
 * Version: v1.0
 * 
-* Created: Thursday, August 11, 2016, ‏‎7:02:03 PM
+* Created: Thursday, August 11, 2016, 7:02:03 PM
 * Copyright (C) 2016 under the GNU General Public License. All rights reserved.
 * 
 */
