@@ -12,6 +12,7 @@ import java.util.Scanner;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
+import java.io.Console;
 
 public class SendGmailSSL
 {
@@ -19,10 +20,18 @@ public class SendGmailSSL
 	{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		Scanner sc = new Scanner(System.in);
+		Console cnsl = null;
 		System.out.print("Enter your email id(username@gmail.com): ");
 		final String from = sc.next();
-		System.out.print("\nEnter password: ");
-		String pass1 = sc.next();
+		String pass1 = "";
+		try{
+		cnsl = System.console();
+		if (cnsl != null){
+			char[] pswd = cnsl.readPassword("\nEnter password: ");
+			pass1 = new String(pswd);
+		}
+		}catch(Exception ex){ex.printStackTrace();
+		}
 		final String pass2 = pass1;
 		boolean password_wrong;
 		Properties props = new Properties();
@@ -55,8 +64,14 @@ public class SendGmailSSL
 			catch(AuthenticationFailedException e)
 			{
 				password_wrong = true;
-				System.out.print("Authentication failed. Please enter another password: ");
-				pass1 = sc.next();
+				try{
+				cnsl = System.console();
+				if (cnsl != null){
+					char[] pswd = cnsl.readPassword("Authentication failed. Please enter another password: ");
+					pass1 = new String(pswd);
+				}
+				}catch(Exception ex){ex.printStackTrace();
+				}
 				final String pass3 = pass1;
 				System.out.println("\nAuthenticating. Please wait.....");
 				session = Session.getDefaultInstance(props, 
